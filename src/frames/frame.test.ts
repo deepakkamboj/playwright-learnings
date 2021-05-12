@@ -12,25 +12,25 @@ describe("Frames handling concept", () => {
         context = await browser.newContext()
         page = await context.newPage();
         await page.goto("https://letcode.in/frame")
-    })
+    });
     test("Interact with frames", async () => {
         const frame = page.frame({ name: "firstFr" });
         // frame?.fill("")
         if (frame != null) {
-            await frame.fill("input[name='fname']", "Koushik");
-            await frame.fill("input[name='lname']", "Chatterjee");
+            await frame.fill("input[name='fname']", "Deepak");
+            await frame.fill("input[name='lname']", "Kamboj");
 
             // inner frame
             const frames = frame.childFrames();
             console.log('No. of inner frames: ' + frames.length);
             if (frames != null)
-                await frames[0].fill("input[name='email']", "koushik@mail.com")
+                await frames[0].fill("input[name='email']", "deepakkamboj@gmail.com")
             else {
                 console.log("Wrong frame");
             }
             const parent = frames[0].parentFrame()
             // await frame.fill("input[name='lname']", "Letcode");
             await parent?.fill("input[name='lname']", "Youtube");
-        } else throw new Error("No such frame")
-    })
-})
+        } else throw new Error("No such frame");
+    });
+});

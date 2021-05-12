@@ -12,7 +12,7 @@ describe("How to handle Select", () => {
         context = await browser.newContext()
         page = await context.newPage();
         await page.goto("https://letcode.in/dropdowns")
-    })
+    });
     test("Select a dropdown based on value", async () => {
         const fruits = await page.$("#fruits");
         // await fruits?.selectOption({ label: "" });
@@ -21,30 +21,30 @@ describe("How to handle Select", () => {
         if (msg) {
             expect(await msg.textContent()).toContain("Orange");
         }
-    })
+    });
     test("Select multiple", async () => {
         const heros = await page.$("#superheros");
         heros?.selectOption([
             { label: "Aquaman" }, { value: "bt" }, { index: 8 }
-        ])
-    })
+        ]);
+    });
     test("Count of the select", async () => {
-        const lang = await page.$$("#lang option")
+        const lang = await page.$$("#lang option");
         console.log(lang.length);
-    })
+    });
     test("get selected text", async () => {
         await page.selectOption("#country", "India");
 
-        //await page.$eval("#country", ele => ele.value)
+        //await page.$eval("#country", element => element.value)
 
-        const text = await page.$eval<string, HTMLSelectElement>("#country", ele => ele.value)
+        const text = await page.$eval<string, HTMLSelectElement>("#country", element => element.value);
         console.log(text);
         expect(text).toBe("India");
     })
 
     afterAll(async () => {
-        await page.close()
-        await context.close()
-        await browser.close()
-    })
-})
+        await page.close();
+        await context.close();
+        await browser.close();
+    });
+});

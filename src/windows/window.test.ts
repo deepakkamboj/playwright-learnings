@@ -12,18 +12,18 @@ describe("Window handling", () => {
         context = await browser.newContext()
         page = await context.newPage();
         await page.goto("https://letcode.in/windows")
-    })
+    });
 
     test("Home Page", async () => {
         console.log(await page.title());
         expect(await page.title()).toBe("Window handling - LetCode");
-    })
+    });
 
     xtest("Single page handling", async () => {
         const [newWindow] = await Promise.all([
             context.waitForEvent("page"), // page is new tab in broswer window
             await page.click("#home")
-        ])
+        ]);
 
         // make sure the page has been loaded completely
         await newWindow.waitForLoadState();
@@ -40,7 +40,7 @@ describe("Window handling", () => {
         // await newWindow.close();
         await page.bringToFront();
         await page.click('"LetXPath"');
-    })
+    });
     test("Multipage handling", async () => {
         const [multipage] = await Promise.all([
             context.waitForEvent("page"),
@@ -56,13 +56,13 @@ describe("Window handling", () => {
         allwindows[1].on("dialog", (dialog) => {
             console.log('Message: ' + dialog.message());
             dialog.accept();
-        })
-        await allwindows[1].click("id=accept")
+        });
+        await allwindows[1].click("id=accept");
 
     })
     afterAll(async () => {
-        await page.close()
-        await context.close()
-        await browser.close()
-    })
-})
+        await page.close();
+        await context.close();
+        await browser.close();
+    });
+});

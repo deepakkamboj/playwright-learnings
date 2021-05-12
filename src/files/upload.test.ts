@@ -2,9 +2,9 @@ import { chromium } from 'playwright';
 
 describe('Upload file', () => {
 
-    const filePath0 = '../videos/a.webm';
-    const filePath1 = '../videos/b.webm';
-    xtest("upload file using set input files", async () => {
+    const filePath0 = './videos/a.webm';
+    const filePath1 = './videos/b.webm';
+    test("Upload file using set input files", async () => {
 
         const browser = await chromium.launch({
             headless: false
@@ -15,7 +15,7 @@ describe('Upload file', () => {
         await page.setInputFiles("input[name='qqfile']", [filePath0, filePath1]);
     });
 
-    test("Upload using on function (listener)", async () => {
+    xtest("Upload using on function (listener)", async () => {
         const browser = await chromium.launch({
             headless: false
         })

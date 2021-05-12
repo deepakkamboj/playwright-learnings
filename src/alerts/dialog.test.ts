@@ -12,7 +12,7 @@ describe("Learn how to handle alert", () => {
         context = await browser.newContext()
         page = await context.newPage();
         await page.goto("https://letcode.in/alert")
-    })
+    });
     test("Handle dialogs", async () => {
         const element = await page.$("#prompt");
         page.on("dialog", (dialog) => {
@@ -23,11 +23,11 @@ describe("Learn how to handle alert", () => {
             // dialog.dismiss()
         })
         await element?.click();
-    })
+    });
 
     afterAll(async () => {
-        await page.close()
-        await context.close()
-        await browser.close()
-    })
-})
+        await page.close();
+        await context.close();
+        await browser.close();
+    });
+});
