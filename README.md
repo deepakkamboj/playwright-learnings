@@ -97,16 +97,18 @@ module.exports = {
     },
   };
 ```
--  **preset** — Integration with jest & playwright
--  **testMatch** — spec pattern that need to be run
--  **transform** — typescript test compatible with jest
--  **testTimeout** — global test timeout
--  **testEnvironmentOptions** — test specific more configurations 
+- **preset** — Integration with jest & playwright
+- **testMatch** — spec pattern that need to be run
+- **transform** — typescript test compatible with jest
+- **testTimeout** — global test timeout
+- **testEnvironmentOptions** — test specific more configurations:
   - **browsers** — Multiple browsers that tests should be running in
   - **launchOptions** — browser launch options. can use to make tests headless and slow down test progress 
 
 [More configs:](https://jestjs.io/docs/en/configuration)
+
 package.json
+
 ```
 "scripts": {
     "test": "jest --detectOpenHandles",
@@ -122,13 +124,17 @@ package.json
     "typescript": "^4.1.3"
   }
 ```
--  scripts — Define your testing scripts to run with “npm“
+- **scripts** — Define your testing scripts to run with “npm“
 
 ### With this config tests can be run as:
 `$ npm test`
 
 ### For running a specific test file give its file path
 `$ npm test src/specs/login.test.js`
+
+or 
+
+`$ jest login.test.js`
 
 ### Point debug setup file through vscode code settings (.vscode > launch.json)
 ```
