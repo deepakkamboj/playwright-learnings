@@ -102,8 +102,8 @@ module.exports = {
 -  **transform** — typescript test compatible with jest
 -  **testTimeout** — global test timeout
 -  **testEnvironmentOptions** — test specific more configurations 
- - **browsers** — Multiple browsers that tests should be running in
- - **launchOptions** — browser launch options. can use to make tests headless and slow down test progress 
+  - **browsers** — Multiple browsers that tests should be running in
+  - **launchOptions** — browser launch options. can use to make tests headless and slow down test progress 
 
 [More configs:](https://jestjs.io/docs/en/configuration)
 package.json
