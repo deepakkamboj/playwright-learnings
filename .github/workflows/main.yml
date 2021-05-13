@@ -37,7 +37,7 @@ jobs:
           path: testResults/*.trx
 
       - name: Publish .xml Test Results
-        uses: EnricoMi/publish-unit-test-result-action@v1
+        uses: EnricoMi/publish-unit-test-result-action/composite@v1
         if: always()
         with:
           files: testReports/**/*.xml
