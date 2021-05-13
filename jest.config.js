@@ -20,9 +20,6 @@ module.exports = {
       [
         "jest-junit",
          {
-          classNameTemplate: (vars) => {
-            return vars.classname.toUpperCase();
-          },
           "outputDirectory": "testReports",
           "outputName": "test_report.xml"
         }
