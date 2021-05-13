@@ -195,9 +195,9 @@ describe("Sample Test Suite", () => {
         browser = await chromium.launch({
             headless: false
         });
-        context = await browser.newContext()
+        context = await browser.newContext();
         page = await context.newPage();
-        await page.goto("https://w3schools.com")
+        await page.goto("https://w3schools.com");
     });
 
     test("Home Page", async () => {
