@@ -258,3 +258,139 @@ afterAll(() => {
 ```
 
 `initializeDatabase` and `deleteDatabase` do not exist in default libraries. You need to implement these functions if required for test cases.
+
+
+
+## Playwright offer several timeout options.
+One of the most usual problems with pages that contain a lot of content, because of the ads, images etc. is the load time, an exception is thrown (specifically the TimeoutError) after a page takes more than 30000ms (30 seconds) to load totally. You can configure timeouts related to waiting for elements to be available, timeouts related to navigation or global timeouts.
+
+### page.waitForSelector
+This allows your script to wait until a selector is available in the DOM.
+By default this will wait up to 30 seconds. If you want to change this option, you can pass in a timeout option:
+
+
+`await page.waitForSelector('h1', { timeout: 5000 });`
+
+In a test, this might for example be useful when you want to submit a form and wait until a new DOM element is found:
+
+```
+test('should submit a form and wait for the element', async () => {
+  await page.type('input[name=q]', 'HeadlessTesting');
+  await page.click('input[type="submit"]');
+  await page.waitForSelector('h1', { timeout: 5000 });
+});
+```
+
+### page.waitForNavigation
+Allows your script to wait until a navigation event is triggered.
+For example: click a link, and wait until the navigation event has completed before proceeding with the script.
+
+
+`await page.waitForNavigation();`
+
+In a test, this might for example be useful when you want to submit a form and wait until a new DOM element is found:
+
+```
+const waitForNavigationPromise =  page.waitForNavigation();
+await page.click('a.my-link');
+await waitForNavigationPromise;
+```
+
+With `page.waitForNavigation` you can specify several waitUntil options:
+
+
+### Dom Event Based Options
+You can choose to wait for a DOM event to occur, such as:
+
+- **load** - wait until the entire page, including assets, has loaded.
+- **domcontentloaded** - when your HTML has loaded.
+
+### Heuristic Based Options
+This will wait until the network connections in your browser are no longer active.
+
+- **networkidle0** - triggered when there are no more than 0 network connections for at least 500 ms.
+- **networkidle2** - triggered when there are no more than 2 network connections for at least 500 ms.
+
+Depending on your use-case, you should pick either DOM based or Heuristic based. For server-side websites, we recommend networkidle2.
+
+### page.setDefaultNavigationTimeout
+Fixing the issue globally on the tab of browser.
+The option that I prefer, as I browse multiple pages in the same tab, is to remove the timeout limit on the tab that I use to browse. For example, to remove the limit you should add:
+
+`await page.setDefaultNavigationTimeout(0);`
+
+The `setDefaultNavigationTimeout` method available on a created page of Playwright allows you to define the timeout of the tab and expects as first argument, the value in milliseconds. A value of 0 means an unlimited amount of time. The following snippet shows how you can do it in a real example:
+
+```
+import { chromium } from "playwright";
+
+describe("Sample Test Suite", () => {
+
+  test("Sample Test Case", () => {
+
+    // Create an instance of the chrome browser
+    // But disable headless mode !
+    const browser = await chromium.launch({
+        headless: false
+    });
+
+    // Create a new page
+    const page = await browser.newPage();
+
+    // Configure the navigation timeout
+    await page.setDefaultNavigationTimeout(0);
+
+    // Navigate to some website e.g Our Code World
+    await page.goto('http://w3schools.com');
+
+    // Do your stuff
+    // ...
+
+  });
+});
+```
+
+### Specifically on the current page
+Alternatively, for specifical pages in case that you handle multiple pages on different variables, you should be able to specify the limit on the context as an option in the configuration object of the page.goto method:
+
+```
+await page.goto('https://w3schools.com', {
+    waitUntil: 'load',
+    // Remove the timeout
+    timeout: 0
+});
+```
+The following snippet shows how to do it in a real example:
+
+```
+import { chromium } from "playwright";
+
+describe("Sample Test Suite", () => {
+
+  test("Sample Test Case", () => {
+    // Create an instance of the chrome browser
+    // But disable headless mode !
+    const browser = await chromium.launch({
+        headless: false
+    });
+
+    // Create a new page
+    const page = await browser.newPage();
+
+    // Configure the navigation timeout
+    await page.goto('https://w3schools.com', {
+        waitUntil: 'load',
+        // Remove the timeout
+        timeout: 0
+    });
+
+    // Navigate to some website e.g Our Code World
+    await page.goto('http://w3schools.com');
+
+    // Do your stuff
+    // ...
+  });
+});
+```
+
+Happy coding !!
