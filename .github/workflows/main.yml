@@ -18,6 +18,9 @@ jobs:
       - name: Install Node
         uses: actions/setup-node@v1
 
+      - name: Playwright Setup
+        uses: microsoft/playwright-github-action@v1
+
       - name: Install Dependencies
         run: npm install
 
