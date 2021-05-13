@@ -24,7 +24,7 @@ describe("Frames handling concept", () => {
             const frames = frame.childFrames();
             console.log('No. of inner frames: ' + frames.length);
             if (frames != null)
-                await frames[0].fill("input[name='email']", "deepakkamboj@gmail.com")
+                await frames[0].fill("input[name='email']", "deepakkamboj@gmail.com", {timeout: 120000})
             else {
                 console.log("Wrong frame");
             }
