@@ -1,6 +1,6 @@
 # This is a basic workflow to help you get started with Actions
 
-name: CI Pipeline
+name: 'CI Pipeline'
 
 on:
   push:
@@ -9,7 +9,8 @@ on:
 
 jobs:
   e2e-tests:
-    runs-on: ubuntu-latest # or macos-latest, windows-latest
+    name: 'Playwright Tests'
+    runs-on: windows-latest # or macos-latest, ubuntu-latest
 
     steps:
       - name: Checkout Source Code
