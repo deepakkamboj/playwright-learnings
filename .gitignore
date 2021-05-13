@@ -103,3 +103,12 @@ dist
 
 # TernJS port file
 .tern-port
+
+#screenshots folder
+screenshots/
+
+#test results folder
+testResults/
+
+*.png
+*.pdf

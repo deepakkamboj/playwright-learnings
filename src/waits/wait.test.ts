@@ -30,7 +30,7 @@ describe("Wait Test", () => {
             return response.request().resourceType() === "xhr"
         });
 
-        await page.screenshot({ path: `example-${Date.now().toString()}.png` });
+        await page.screenshot({ path: `./screenshots/example-${Date.now().toString()}.png` });
 
         await page.close();
         await context.close();

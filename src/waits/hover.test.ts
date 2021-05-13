@@ -24,7 +24,7 @@ describe('Launch Browser', () => {
 
         //hover the menu
         await page.hover("[id='Automation Tools']");
-        //await browser.close();
+        await browser.close();
     });
 
 });

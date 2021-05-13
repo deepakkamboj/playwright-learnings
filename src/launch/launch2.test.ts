@@ -16,7 +16,7 @@ describe("Test suite name", ()=>{
         //navigate to a website
         await page.goto('https://www.w3schools.com/');
 
-        await page.screenshot({ path: `example-${Date.now().toString()}.png` });
+        await page.screenshot({ path: `./screenshots/example-${Date.now().toString()}.png` });
 
         await page.close();
         await context.close();

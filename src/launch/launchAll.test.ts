@@ -21,7 +21,7 @@ describe.each([
 
     it('Open Google', async () => {
         await page.goto('https://www.google.com');
-        await page.screenshot({ path: `example-${Date.now().toString()}.png` });
+        await page.screenshot({ path: `./screenshots/example-${Date.now().toString()}.png` });
     });
 
 });

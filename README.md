@@ -132,7 +132,7 @@ package.json
 ### For running a specific test file give its file path
 `$ npm test src/specs/login.test.js`
 
-or 
+or
 
 `$ jest login.test.js`
 
@@ -156,3 +156,105 @@ or
     ]
   }
  ```
+
+ ### Adding reporter for test results
+ Integrated jest trx results reporter to generate trx based test report. There are many other reporters available to integrate with jest for better reporting: https://github.com/jest-community/awesome-jest#reporters
+
+`$ npm install — save-dev jest-trx-results-processor`
+
+Add the below code in the jest.config.js
+
+```
+  reporters: [
+      "default",
+      [
+      "jest-trx-results-processor",
+      {
+        "outputFile": "testResults/tests-results.trx"
+      }
+      ]
+    ]
+```
+
+- **outputFile** — Define location and file name to create reports.
+
+
+## Sample Tests
+Here is a sample test for you:
+
+```
+import { Browser, BrowserContext, Page, chromium } from "playwright";
+
+describe("Sample Test Suite", () => {
+
+    let browser: Browser;
+    let context: BrowserContext;
+    let page: Page;
+
+    beforeAll(async () => {
+        browser = await chromium.launch({
+            headless: false
+        });
+        context = await browser.newContext()
+        page = await context.newPage();
+        await page.goto("https://w3schools.com")
+    });
+
+    test("Home Page", async () => {
+        console.log(await page.title());
+    });
+
+    xtest("Test to be skipped", async () => {
+
+    });
+ 
+    afterAll(async () => {
+        await page.close();
+        await context.close();
+        await browser.close();
+    });
+});
+```
+### Repeating Setup For Many Tests
+If you have some work you need to do repeatedly for many tests, you can use `beforeEach` and `afterEach`.
+
+For example, let's say that several tests interact with a Unified Client App. You have a method `launchAndAuthenticate()` that must be called before each of these tests to launch and authenticate the Unified Client App, and close the browser after each of these tests. You can do this with:
+
+```
+beforeEach(async () => {
+  ({ page, browser } = await launchAndAuthenticate(ViewPort));
+});
+
+afterEach(async () => {
+  await browser.close();
+});
+```
+`beforeEach` and `afterEach` can handle asynchronous code in the same ways that tests can handle asynchronous code by returning a promise. For example, if `populateDatabase()` returned a promise that resolved when the database was inserted with records, we would want to return that promise, and a method `cleanUpDatabase()` that must be called after each of these tests if you are creating any test data during test execution.
+
+```
+beforeEach(() => {
+  return populateDatabase();
+});
+
+afterEach(() => {
+  return cleanUpDatabase();
+});
+```
+`populateDatabase` and `cleanUpDatabase` do not exist in default libraries. You need to implement these functions if required for test cases.
+
+### One-Time Setup
+In some cases, you only need to do setup once, at the beginning of a file. This can be especially bothersome when the setup is asynchronous, so you can't do it inline. Jest provides `beforeAll` and `afterAll` to handle this situation.
+
+For example, if both `initializeDatabase` and `deleteDatabase` returned promises, and the entity database could be reused between tests, we could change our test code to:
+
+```
+beforeAll(() => {
+  return initializeDatabase();
+});
+
+afterAll(() => {
+  return deleteDatabase();
+});
+```
+
+`initializeDatabase` and `deleteDatabase` do not exist in default libraries. You need to implement these functions if required for test cases.
