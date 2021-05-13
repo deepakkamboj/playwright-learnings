@@ -27,6 +27,7 @@ jobs:
 
       - name: Run Playwright Tests
         run: npm test
+        timeout-minutes: 15
 
       - name: Publish .trx Test Results
         uses: actions/upload-artifact@v2

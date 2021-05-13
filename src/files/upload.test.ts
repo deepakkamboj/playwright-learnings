@@ -13,6 +13,8 @@ describe('Upload file', () => {
         const page = await context.newPage();
         await page.goto('https://www.sendgb.com/');
         await page.setInputFiles("input[name='qqfile']", [filePath0, filePath1]);
+
+        await browser.close();
     });
 
     xtest("Upload using on function (listener)", async () => {
@@ -24,9 +26,11 @@ describe('Upload file', () => {
         await page.goto('https://the-internet.herokuapp.com/upload');
         page.on("filechooser", async (filechooser) => {
             //  filechooser.isMultiple();
-            await filechooser.setFiles([filePath0, filePath1])
+            await filechooser.setFiles([filePath0, filePath1]);
         });
-        await page.click(".example + div#drag-drop-upload", { force: true })
+        await page.click(".example + div#drag-drop-upload", { force: true });
+
+        await browser.close();
     });
 
 });

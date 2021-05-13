@@ -22,7 +22,7 @@ describe("Window handling", () => {
     xtest("Single page handling", async () => {
         const [newWindow] = await Promise.all([
             context.waitForEvent("page"), // page is new tab in broswer window
-            await page.click("#home");
+            await page.click("#home")
         ]);
 
         // make sure the page has been loaded completely
