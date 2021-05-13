@@ -12,11 +12,21 @@ jobs:
     runs-on: ubuntu-latest # or macos-latest, windows-latest
 
     steps:
-      - uses: actions/checkout@v2
+      - name: Checkout Source Code
+        uses: actions/checkout@v2
 
-      - uses: actions/setup-node@v1
+      - name: Install Node
+        uses: actions/setup-node@v1
 
-      - name: Install dependencies and run tests
-        run: npm install && npm test
+      - name: Install Dependencies
+        run: npm install
 
+      - name: Run Playwright Tests
+        run: npm test
 
+      - name: Publish Test Results
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: test-artifacts
+          path: testResults/*.trx
