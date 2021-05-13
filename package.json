@@ -16,6 +16,7 @@
     "playwright": "^1.10.0",
     "typescript": "^4.1.3",
     "ts-jest": "^26.5.0",
-    "jest-trx-results-processor": "2.2.0"
+    "jest-trx-results-processor": "2.2.0",
+    "jest-junit-reporter": "1.1.0"
   }
 }

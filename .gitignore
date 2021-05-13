@@ -108,6 +108,7 @@ screenshots/
 
 #test results folder
 testResults/
+testReports/
 
 *.png
 *.pdf
