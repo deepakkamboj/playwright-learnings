@@ -34,7 +34,7 @@ Playwright enables fast, reliable, and capable automation across all modern brow
 - [eslint-plugin-jest](https://github.com/jest-community/eslint-plugin-jest) - ESLint plugin to follow best practices and anticipate common mistakes when writing tests with jest
 - [jest-runner-groups](https://github.com/eugene-manuilov/jest-runner-groups) - A test runner that allows you to tag your tests and execute specific groups of tests with Jest.
 - [axe-playwright](https://www.npmjs.com/package/axe-playwright) - Analyses the page and identifies accessibility issues.
-
+- [Playwright test runner](https://github.com/microsoft/playwright-test) - Zero config cross-browser end-to-end testing for web apps. Browser automation with Playwright, Jest-like assertions and built-in support for TypeScript.
 
 ## Getting Started
 
@@ -55,11 +55,10 @@ Playwright is easy to install and start to work with. Just have to create a fres
 ```
 {
   "compilerOptions": {
-    "target": "es6",
-    "lib": ["dom", "dom.iterable", "esnext"],
-    "strict": true,
-    "module": "commonjs",
-    "noEmit": true
+     "target": "es6",
+     "module": "commonjs",
+     "strict": true,
+     "sourceMap": true
   },
   "include": ["src"]
 }
