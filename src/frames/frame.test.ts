@@ -9,9 +9,9 @@ describe("Frames handling concept", () => {
         browser = await chromium.launch({
             headless: false
         });
-        context = await browser.newContext()
+        context = await browser.newContext();
         page = await context.newPage();
-        await page.goto("https://letcode.in/frame")
+        await page.goto("https://letcode.in/frame");
     });
     test("Interact with frames", async () => {
         const frame = page.frame({ name: "firstFr" });
@@ -28,7 +28,7 @@ describe("Frames handling concept", () => {
             else {
                 console.log("Wrong frame");
             }
-            const parent = frames[0].parentFrame()
+            const parent = frames[0].parentFrame();
             // await frame.fill("input[name='lname']", "Letcode");
             await parent?.fill("input[name='lname']", "Youtube");
         } else throw new Error("No such frame");

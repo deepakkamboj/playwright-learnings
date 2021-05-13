@@ -27,10 +27,17 @@ jobs:
 
       - name: Run Playwright Tests
         run: npm test
+        timeout-minutes: 15
 
-      - name: Publish Test Results
+      - name: Publish .trx Test Results
         uses: actions/upload-artifact@v2
         if: ${{ always() }}
         with:
           name: test-artifacts
           path: testResults/*.trx
+
+      - name: Publish .xml Test Results
+        uses: EnricoMi/publish-unit-test-result-action@v1
+        if: always()
+        with:
+          files: testReports/**/*.xml
