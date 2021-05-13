@@ -41,3 +41,4 @@ jobs:
         if: always()
         with:
           files: testReports/**/*.xml
+          check_name: 'Playwright Test Results'

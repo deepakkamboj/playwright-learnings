@@ -33,4 +33,10 @@ describe("Frames handling concept", () => {
             await parent?.fill("input[name='lname']", "Youtube");
         } else throw new Error("No such frame");
     });
+
+    afterAll(async () => {
+        await page.close();
+        await context.close();
+        await browser.close();
+    });
 });
