@@ -1,0 +1,45 @@
+# This is a basic workflow to help you get started with Actions
+
+name: 'Scheduled Cron Job'
+
+on:
+  schedule:
+    # * is a special character in YAML so you have to quote this string
+    - cron: '*/30 * * * *'
+    - cron: '5,10,15,20,25 17 * * *'
+
+jobs:
+  e2e-tests:
+    name: 'Playwright Tests'
+    runs-on: windows-latest # or macos-latest, ubuntu-latest
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v2
+
+      - name: Install Node
+        uses: actions/setup-node@v1
+
+      - name: Playwright Setup
+        uses: microsoft/playwright-github-action@v1
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Run Playwright Tests
+        run: npm test -- cronjob
+        timeout-minutes: 15
+
+      - name: Publish .trx Test Results
+        uses: actions/upload-artifact@v2
+        if: ${{ always() }}
+        with:
+          name: test-artifacts
+          path: testResults/*.trx
+
+      - name: Publish .xml Test Results
+        uses: EnricoMi/publish-unit-test-result-action/composite@v1
+        if: always()
+        with:
+          files: testReports/**/*.xml
+          check_name: 'Playwright Test Results'
