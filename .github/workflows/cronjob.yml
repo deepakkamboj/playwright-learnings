@@ -5,8 +5,8 @@ name: 'Scheduled Cron Job'
 on:
   schedule:
     # * is a special character in YAML so you have to quote this string
-    - cron: '*/30 * * * *'
-    - cron: '5,10,15,20,25 17 * * *'
+   # - cron: '*/30 * * * *'
+   # - cron: '5,10,15,20,25 17 * * *'
 
 jobs:
   e2e-tests:
